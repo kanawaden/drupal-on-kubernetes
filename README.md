@@ -104,6 +104,14 @@ helm install --values ./helm/using-stable-charts/drupal/values.yaml --name drupa
 
 Note: I have already overridden default values of this charts. Please refer to respective values.yaml for more detail.
 
+### Installing the Chart - Using custom charts
+
+To install the drupal chart with release name `drupal`:
+```console
+helm install --name drupal ./helm/custom-charts/drupal
+```
+
+
 ## Uninstalling the Chart
 
 To uninstall/delete the deployment:
