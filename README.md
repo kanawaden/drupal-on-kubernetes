@@ -111,6 +111,26 @@ To install the drupal chart with release name `drupal`:
 helm install --name drupal ./helm/custom-charts/drupal
 ```
 
+### Accessing drupal
+
+1. Get the Drupal URL:
+
+  NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+
+```console
+export SERVICE_IP=$(kubectl get svc --namespace default drupal-drupal --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
+
+echo "Drupal URL: http://$SERVICE_IP/"
+```
+2. Login with the following credentials
+
+```console
+echo Username: user
+echo Password: $(kubectl get secret --namespace default drupal-drupal -o jsonpath="{.data.drupal-password}" | base64 --decode)
+```
+
+3. Open Drupal URL in browser and login via above credentials.
+![Drupal Home Page](assets/images/drupal-home.png "Drupal Home Page")
 
 ## Uninstalling the Chart
 
